@@ -1,6 +1,9 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+import Config from 'dij-config';
+console.log(Config)
+
 module.exports = {
   devtool: 'source-map',
 
@@ -10,11 +13,11 @@ module.exports = {
     path: __dirname + '/static/dist/',
     filename: 'bundle.js',
   },
-  
+
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  
+
   module: {
     loaders: [
       {
@@ -34,6 +37,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
+        'MONGO_URL': Config.mongoURL
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
