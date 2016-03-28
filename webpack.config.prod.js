@@ -1,8 +1,13 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-import Config from 'dij-config';
-console.log(Config)
+try {
+  import Config from 'dij-config';
+  console.log(Config)
+  NODE_ENV.MONGO_URL = Config.mongoURL;
+} catch (e) {
+  console.log('no dij-config. default MONGO_URL');
+}
 
 module.exports = {
   devtool: 'source-map',
@@ -37,7 +42,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
-        'MONGO_URL': NODE_ENV.MONGO_URL || Config.mongoURL
+        'MONGO_URL': NODE_ENV.MONGO_URL
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

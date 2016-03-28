@@ -1,6 +1,11 @@
 var webpack = require('webpack');
-import Config from 'dij-config';
-console.log(Config)
+try {
+  import Config from 'dij-config';
+  console.log(Config)
+  NODE_ENV.MONGO_URL = Config.mongoURL;
+} catch (e) {
+  console.log('no dij-config. default MONGO_URL');
+}
 //mongodb://<asdf>:<fdsa>@dogen.mongohq.com:10028/
 
 module.exports = {
@@ -42,7 +47,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         CLIENT: JSON.stringify(true),
-        MONGO_URL: NODE_ENV.MONGO_URL || Config.mongoURL
+        MONGO_URL: NODE_ENV.MONGO_URL
       }
     })
   ],
