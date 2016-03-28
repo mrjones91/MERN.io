@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-import Config from '../test/dij-config';
+import Config from 'dij-config';
 console.log(Config)
 //mongodb://<asdf>:<fdsa>@dogen.mongohq.com:10028/
 
@@ -42,7 +42,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         CLIENT: JSON.stringify(true),
-        MONGO_URL: Config.mongoURL
+        MONGO_URL: NODE_ENV.MONGO_URL || Config.mongoURL
       }
     })
   ],

@@ -37,7 +37,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
-        'MONGO_URL': Config.mongoURL
+        'MONGO_URL': NODE_ENV.MONGO_URL || Config.mongoURL
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
